@@ -5,8 +5,8 @@ from queue import Queue
 
 socket.setdefaulttimeout(0.55)
 print_lock = threading.Lock() # lock thread during print so we get cleaner outputs
-target = input('Host to Scan: ') # convert to ip if given hostname
-t_IP = socket.gethostbyname(target)
+target = input('Host to Scan: ') 
+t_IP = socket.gethostbyname(target) # convert to ip if given hostname
 print ('Scanning Host for Open Ports: ', t_IP)
 
 def portscan(port):
@@ -19,19 +19,16 @@ def portscan(port):
    except:
       pass
 
-# threader thread pulls worker from queue and processes
-def threader():
+def threader(): # threader thread pulls worker from queue and processes
    while True:
-      worker = q.get() # gets worker from queue# gets worker from queue
+      worker = q.get() # gets worker from queue
       portscan(worker) # run job with worker in queue (thread)
       q.task_done()
-
-# create queue for threader      
-q = Queue()
+  
+q = Queue() # create queue for threader 
 startTime = time.time()
 
-# number of threads  
-for x in range(400):
+for x in range(400): # number of threads 
    t = threading.Thread(target = threader)
    t.daemon = True
    t.start() 
