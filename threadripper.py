@@ -1,6 +1,6 @@
 '''
 This is a basic port scanner that just looks for open ports.
-It uses 400 threads to complete it much faster than nmap.
+It uses 400 threads and finishes scanning all 65535 ports in less than a min.
 '''
 
 import socket  
